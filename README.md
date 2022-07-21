@@ -13,4 +13,6 @@
     https://github.com/zurisha7/social-network.git
     
    ## Tutorial videos
-   
+   https://drive.google.com/file/d/1cGKV9_lCpOERnVL1d0x0T5tgfSTHEU8H/view
+https://drive.google.com/file/d/1GfyHXC3StJq2ejbkGnWOJ8OYB3k0e8NC/view
+https://drive.google.com/file/d/18Ro_IPECfD8cojPNssnf7-YkR8FBJ6WN/view
