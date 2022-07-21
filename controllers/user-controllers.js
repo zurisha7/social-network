@@ -42,7 +42,7 @@ const userController = {
 
     // update a user
     updateUser({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, {new: true, runValidators: true })
+        User.findOneAndUpdate({ _id: params.userId }, body, {new: true, runValidators: true })
         .then(dbUserData => {
             if(!dbUserData) {
                 res.status(404).json({ message: 'No user with this id!' })
@@ -55,7 +55,7 @@ const userController = {
 
     //delete a user
     deleteUser({ params }, res) {
-        User.findOneAndDelete({ _id: params.id })
+        User.findOneAndDelete({ _id: params.userId })
             .then(dbUserData => {
                 if(!dbUserData) {
                     res.status(404).json({ message: 'No User found with this id!' })
@@ -64,7 +64,43 @@ const userController = {
                     res.json(dbUserData)
             })   
                     .catch(err => res.json(err));
-    }
+    }, 
+
+    removeFriend({ params, body }, res) {
+        User.findOneAndUpdate(
+         { _id: params.userId },
+         {$pull: { friends: body }},
+         { runValidators: true, new: true }
+        )
+        .then(dbUserData => {
+         if(!dbUserData) {
+             return res.status(404).json({ message: 'No User with that id' })
+         }
+         res.json(dbUserData);
+        })
+        .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+        });
+     },
+
+     addFriend({ params, body }, res) {
+        User.findOneAndUpdate(
+            { _id: params.userId },
+            { $addToSet: { friends: body } },
+            { runValidators: true, new: true }
+          )
+            .then(dbUserData => {
+              if (!dbUserData) {
+                return res.status(404).json({ message: 'No user with this id!' });
+              }
+              res.json(dbUserData);
+            })
+            .catch(err => {
+              console.log(err);
+              res.status(500).json(err)   
+            });     
+}
 };
 
 module.exports = userController;
