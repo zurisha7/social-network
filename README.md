@@ -10,7 +10,7 @@
     Andrea West
   
   ## Github 
-    https://github.com/zurisha7/social-network
+    https://github.com/zurisha7/social-network.git
     
    ## Tutorial videos
    
