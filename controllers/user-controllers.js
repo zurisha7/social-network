@@ -19,7 +19,7 @@ const userController = {
 
     // get one user
     getUserById({ params }, res) {
-        User.findOne({ _id: params.id })
+        User.findOne({ _id: params.userId })
             .populate({
                 path: 'thoughts',
                 path: 'friends',
@@ -87,7 +87,7 @@ const userController = {
      addFriend({ params, body }, res) {
         User.findOneAndUpdate(
             { _id: params.userId },
-            { $addToSet: { friends: body } },
+            { $push: { friends: body } },
             { runValidators: true, new: true }
           )
             .then(dbUserData => {

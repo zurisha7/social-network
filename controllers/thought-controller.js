@@ -34,10 +34,10 @@ const thoughtController = {
 
     // update a thought
         updateThought({ params, body }, res) {
-            Thought.findByIdAndUpdate
+            Thought.findOneAndUpdate
             ({ _id: params.thoughtId }, body, (
             {new: true, runValidators: true }))
-                .then(({ _id }) => {
+                .then(({ thoughtId }) => {
                     return User.findOneAndUpdate(
                         { _id: params.userId },
                         { $push: { thoughts: thoughtId }},
